@@ -8,7 +8,7 @@ on:
       - main
 
     paths:
-      - ".github/workflows/docker-build-push.yml"
+      - ".github/workflows/reusable-docker-build-push.yml"
 
 jobs:
 
@@ -27,4 +27,5 @@ jobs:
         uses: google-github-actions/release-please-action@51ee8ae2605bd5ce1cfdcc5938684908f1cd9f69 # v3.7.9
         id: r
         with:
-          command: manifest
+          release-type: simple
+          package-name: reusable-docker-build-push
