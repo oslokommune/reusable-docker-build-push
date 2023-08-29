@@ -1,0 +1,58 @@
+name: Release
+
+on:
+
+  push:
+
+    branches:
+      - main
+
+    paths:
+      - "templates/**"
+
+jobs:
+
+  release-please:
+
+    name: Run release-please
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+
+      - name: Run Release Please
+        uses: google-github-actions/release-please-action@51ee8ae2605bd5ce1cfdcc5938684908f1cd9f69 # v3.7.9
+        id: r
+        with:
+          command: manifest
+
+
+      - if: "${{ steps.r.outputs['templates--release_created'] }}"
+        name: Checkout
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
+
+
+      - if: "${{ steps.r.outputs['templates--release_created'] }}"
+        name: Delete old tag templates-latest
+        env:
+          TAG: templates-latest
+        run: |
+          # Delete old tag
+          git tag --delete "$TAG" || true
+          
+          # Push the tag deletion
+          git push origin ":refs/tags/$TAG" || true
+
+
+      - if: "${{ steps.r.outputs['templates--release_created'] }}"
+        name: Create new tag, update release "templates-latest" and upload release assets
+        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v0.1.15
+        with:
+          name: "templates: latest"
+          tag_name: templates-latest # This creates the new tag
+          draft: false # Without this, every other release will be a draft release
+          files: |
+            templates/*.yml

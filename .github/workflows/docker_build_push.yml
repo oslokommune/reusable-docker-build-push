@@ -1,0 +1,294 @@
+name: Build and push the Docker image
+
+permissions:
+  contents: read
+
+on:
+
+  workflow_call:
+
+    secrets:
+
+      AWS_ROLE_ARN:
+        description: "The AWS role ARN to assume to authenticate to the AWS Elastic Container Registry"
+        required: false
+      DOCKER_SECRETS:
+        description: "List of secrets to expose to the Docker build (e.g., key=string, GIT_AUTH_TOKEN=mytoken)"
+        required: false
+
+    inputs:
+
+      environment:
+        description: >
+          The GitHub deployment environment to use. Leave empty to not use a deployment environment.
+        type: string
+
+      git_ref:
+        description: >
+          The branch, tag or SHA to checkout. Default is the commit SHA that triggered the workflow.
+        required: false
+        type: string
+
+      role_session_name:
+        description: >
+          The AWS role session name to use. Default is the GitHub repository name.
+        required: false
+        type: string
+
+      region:
+        description: >
+          The AWS region to use.
+        required: false
+        default: "eu-west-1"
+        type: string
+
+      context:
+        description: >
+          Docker context (path) to start build from.
+        required: false
+        type: string
+        default: .
+
+      file:
+        description: >
+          Dockerfile to build, relative to context path.
+        required: false
+        default: Dockerfile
+        type: string
+
+
+      platforms:
+        description: > 
+          Platform identifiers to build for.
+        required: false
+        type: string
+        # common ones: linux/amd64,linux/arm64,linux/arm/v7
+        default: linux/amd64
+  
+  
+      build_args:
+        description: >
+          List of build-time variables. `IMAGE_CREATED_DATETIME`, `IMAGE_VERSION` and `IMAGE_REVISION` are added automatically.
+        required: false
+        type: string
+
+      tag_rules:
+        # https://github.com/marketplace/actions/docker-metadata-action#tags-input
+        # Priority affects tags order so image version will be set based on the higher one.
+        description: >
+          Tag rules to use with the docker-metadata action.
+        required: false
+        type: string
+        default: |
+          type=sha,format=long,priority=1100
+          type=sha,prefix=
+          type=raw,value=gha-${{ github.run_id }}
+          type=semver,pattern={{version}}
+
+      push:
+        description: >
+          Push the Docker image to one or more registries.
+        required: false
+        default: false
+        type: boolean
+
+      aws_ecr_enable:
+        description: Log into AWS Elastic Container Registry (ECR).
+        required: false
+        default: true
+        type: boolean
+
+      ecr_repository_name:
+        description: >
+          The ECR repository to push the Docker image to. Default is the GitHub repository name.
+        required: false
+        type: string
+
+      ghcr_enable:
+        description: Log into GitHub Container Registry (GHCR).
+        required: false
+        default: false
+        type: boolean
+
+      ghcr_image_name:
+        description: >
+          The name of the GHCR image. This can be used for multiple applications in a monorepo by appending a slash-separated name component. Default is the GitHub repository name.
+        required: false
+        type: string
+
+    outputs:
+
+      image_version:
+        description: >
+          The image version. Use this to find the image in the ECR repository.
+        value: ${{ jobs.build_push.outputs.image_version }}
+
+      image_tags:
+        description: >
+          The tags that were applied to the image.
+        value: ${{ jobs.build_push.outputs.image_tags }}
+
+      image_id:
+        description: >
+          The image ID. This is the hash of the local image JSON configuration.
+        value: ${{ jobs.build_push.outputs.image_id }}
+
+      image_digest:
+        description: >
+          The image digest. This is the hash of the Docker manifest.
+        value: ${{ jobs.build_push.outputs.image_digest }}
+
+      docker_build_metadata:
+        description: >
+          The Docker build metadata.
+        value: ${{ jobs.build_push.outputs.docker_build_metadata }}
+
+jobs:
+
+  build_push:
+
+    name: Build and push the Docker image
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write # For the GitHub's OIDC Token endpoint
+      contents: read
+      packages: write
+
+    environment: "${{ inputs.environment }}"
+
+    outputs:
+      image_version: ${{ steps.docker-meta.outputs.version }}
+      image_tags: ${{ steps.docker-meta.outputs.tags }}
+      image_id: ${{ steps.build-push.outputs.imageid }}
+      image_digest: ${{ steps.build-push.outputs.digest}}
+      docker_build_metadata: ${{ steps.build-push.outputs.metadata }}
+
+    steps:
+
+      - name: Checkout ⚙️
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
+        with:
+          ref: ${{ inputs.git_ref || github.sha }}
+
+
+      - if: inputs.aws_ecr_enable
+        name: Configure AWS credentials using the OpenID Connect (OIDC) provider 🔑
+        uses: aws-actions/configure-aws-credentials@e1e17a757e536f70e52b5a12b2e8d1d1c60e04ef # v2.0.0
+        with:
+          aws-region: ${{ inputs.region }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          role-session-name: ${{ inputs.role_session_name || github.event.repository.name }}
+
+
+      - if: inputs.aws_ecr_enable
+        name: Login to Elastic Container Registry (ECR) 🔑
+        id: ecr-login
+        uses: aws-actions/amazon-ecr-login@2f9f10ea3fa2eed41ac443fee8bfbd059af2d0a4 # v1.6.0
+
+
+      - if: inputs.aws_ecr_enable
+        name: Set ECR registry ⚙
+        run: echo "ECR_REGISTRY=${{ steps.ecr-login.outputs.registry }}/${{ inputs.ecr_repository_name || github.event.repository.name }}" >> "$GITHUB_ENV"
+
+
+      - if: inputs.ghcr_enable
+        name: Login to GitHub Container Registry (GHCR) 🔑
+        uses: docker/login-action@465a07811f14bebb1938fbed4728c6a1ff8901fc # v2.2.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+
+      - if: inputs.ghcr_enable
+        name: Set GHCR registry ⚙
+        run: echo "GHCR_REGISTRY=ghcr.io/${{ inputs.ghcr_image_name || github.repository }}" >> "$GITHUB_ENV"
+
+
+      - name: Extract metadata (tags, labels) from Git reference and GitHub events ⚙️
+        id: docker-meta
+        uses: docker/metadata-action@c4ee3adeed93b1fa6a762f209fb01608c1a22f1e # v4.4.0
+        with:
+          images: |
+            ${{ env.ECR_REGISTRY }}
+            ${{ env.GHCR_REGISTRY }}
+
+          tags: ${{ inputs.tag_rules }}
+
+
+      - if: ${{ inputs.platforms != 'linux/amd64' }}
+        name: Set up QEMU (Quick EMUlator) for multi-platform images ⚙️
+        uses: docker/setup-qemu-action@2b82ce82d56a2a04d2637cd93a637ae1b359c0a7 # v2.2.0
+
+
+      - name: Set up Docker Buildx ⚙️
+        uses: docker/setup-buildx-action@ecf95283f03858871ff00b787d79c419715afc34 # v2.7.0
+
+
+      - name: Build and push (if enabled) Docker image to one or more registries 🚀
+        id: build-push
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671 # v4.0.0
+        with:
+          context: ${{ inputs.context }}
+          file: ${{ inputs.file }}
+          platforms: ${{ inputs.platforms }}
+          provenance: false
+          build-args: |
+            IMAGE_CREATED_DATETIME=${{ fromJSON(steps.docker-meta.outputs.json).labels['org.opencontainers.image.created'] }}
+            IMAGE_VERSION=${{ fromJSON(steps.docker-meta.outputs.json).labels['org.opencontainers.image.version'] }}
+            IMAGE_REVISION=${{ fromJSON(steps.docker-meta.outputs.json).labels['org.opencontainers.image.revision'] }}
+            ${{ inputs.build_args }}
+          secrets: ${{ secrets.DOCKER_SECRETS }}
+
+          # https://docs.docker.com/build/ci/github-actions/examples/#cache
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+          tags: ${{ steps.docker-meta.outputs.tags }}
+          labels: ${{ steps.docker-meta.outputs.labels }}
+
+          load: ${{ inputs.push == false }}
+          push: ${{ inputs.push }}
+
+
+      - name: Write job summary 📝
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<EOF
+          Image version (use this to find the image in the ECR repository):
+
+          \`\`\`text
+          ${{ steps.docker-meta.outputs.version }}
+          \`\`\`
+
+          Image ID (hash of the local image JSON configuration):
+
+          \`\`\`text
+          ${{ steps.build-push.outputs.imageid }}
+          \`\`\`
+
+          Image digest (hash of the Docker manifest):
+
+          \`\`\`text
+          ${{ steps.build-push.outputs.digest }}
+          \`\`\`
+
+          Image tags:
+
+          \`\`\`text
+          ${{ steps.docker-meta.outputs.tags }}
+          \`\`\`
+
+          Image labels:
+
+          \`\`\`text
+          ${{ steps.docker-meta.outputs.labels }}
+          \`\`\`
+
+          Docker build metadata:
+
+          \`\`\`json
+          ${{ steps.build-push.outputs.metadata }}
+          \`\`\`
+          EOF
