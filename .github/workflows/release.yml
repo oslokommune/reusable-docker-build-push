@@ -8,7 +8,7 @@ on:
       - main
 
     paths:
-      - "templates/**"
+      - ".github/workflows/docker-build-push.yml"
 
 jobs:
 
@@ -29,6 +29,7 @@ jobs:
         with:
           command: manifest
 
+<<<<<<< HEAD
 
       - if: "${{ steps.r.outputs['templates--release_created'] }}"
         name: Checkout
@@ -56,3 +57,5 @@ jobs:
           draft: false # Without this, every other release will be a draft release
           files: |
             templates/*.yml
+=======
+>>>>>>> 327c837 (chore: Rename workflow)
