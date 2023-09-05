@@ -209,7 +209,7 @@ jobs:
 
       - name: Extract metadata (tags, labels) from Git reference and GitHub events ⚙️
         id: docker-meta
-        uses: docker/metadata-action@c4ee3adeed93b1fa6a762f209fb01608c1a22f1e # v4.4.0
+        uses: docker/metadata-action@818d4b7b91585d195f67373fd9cb0332e31a7175 # v4.6.0
         with:
           images: |
             ${{ env.ECR_REGISTRY }}
