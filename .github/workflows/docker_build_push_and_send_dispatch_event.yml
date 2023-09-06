@@ -58,7 +58,7 @@ jobs:
     steps:
 
       - name: Send dispatch event with image tag 🛫
-        uses: peter-evans/repository-dispatch@26b39ed245ab8f31526069329e112ab2fb224588 # v2.1.1
+        uses: peter-evans/repository-dispatch@bf47d102fdb849e755b0b0023ea3e81a44b6f570 # v2.1.2
         with:
           token: ${{ secrets.PAT_ON_MACHINE_USER_FOR_IAC_DISPATCH }}
           repository: ${{ env.RECEIVER_REPOSITORY }}
