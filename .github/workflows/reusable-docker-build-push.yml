@@ -185,7 +185,7 @@ jobs:
       - if: inputs.aws_ecr_enable
         name: Login to Elastic Container Registry (ECR) 🔑
         id: ecr-login
-        uses: aws-actions/amazon-ecr-login@2f9f10ea3fa2eed41ac443fee8bfbd059af2d0a4 # v1.6.0
+        uses: aws-actions/amazon-ecr-login@2fc7aceee09e9e4a7105c0d060c656fad0b4f63d # v1.7.0
 
 
       - if: inputs.aws_ecr_enable
