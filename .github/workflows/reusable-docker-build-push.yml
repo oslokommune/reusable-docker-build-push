@@ -175,7 +175,7 @@ jobs:
 
       - if: inputs.aws_ecr_enable
         name: Configure AWS credentials using the OpenID Connect (OIDC) provider 🔑
-        uses: aws-actions/configure-aws-credentials@04b98b3f9e85f563fb061be8751a0352327246b0 # v3.0.1
+        uses: aws-actions/configure-aws-credentials@50ac8dd1e1b10d09dac7b8727528b91bed831ac0 # v3.0.2
         with:
           aws-region: ${{ inputs.region }}
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
