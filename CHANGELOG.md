@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.1.2](https://github.com/oslokommune/reusable-docker-build-push/compare/v1.1.1...v1.1.2) (2023-09-28)
+
+
+### Dependency Updates
+
+* Bump docker/build-push-action in /.github/workflows ([#18](https://github.com/oslokommune/reusable-docker-build-push/issues/18)) ([e6a530f](https://github.com/oslokommune/reusable-docker-build-push/commit/e6a530f95fc7f21dddeb0aca3d5aa3dd3b29f777))
+* Bump docker/login-action from 2.2.0 to 3.0.0 in /.github/workflows ([#19](https://github.com/oslokommune/reusable-docker-build-push/issues/19)) ([49a513c](https://github.com/oslokommune/reusable-docker-build-push/commit/49a513cc1b8b081a876dfddd1ed68f40ef83f91d))
+* Bump docker/metadata-action in /.github/workflows ([#17](https://github.com/oslokommune/reusable-docker-build-push/issues/17)) ([4b4e2a5](https://github.com/oslokommune/reusable-docker-build-push/commit/4b4e2a5520f312c33457051d0f5bdc772b3b1577))
+* Bump docker/setup-qemu-action in /.github/workflows ([#20](https://github.com/oslokommune/reusable-docker-build-push/issues/20)) ([6b31622](https://github.com/oslokommune/reusable-docker-build-push/commit/6b31622114f7e8eb9cee24782ee0ce10174c254b))
+
 ## [1.1.1](https://github.com/oslokommune/reusable-docker-build-push/compare/v1.1.0...v1.1.1) (2023-09-08)
 
 
