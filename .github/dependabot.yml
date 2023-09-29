@@ -1,25 +1,10 @@
 version: 2
-
 updates:
 
-  # Toil reduction. We don't want these packages to trigger a release, so we use 'chore'.
-  - package-ecosystem: "github-actions"
-    directory: "/.github/workflows"
-    schedule:
-      interval: "daily"
-    commit-message:
-      prefix: chore
-    allow:
-      - dependency-name: "dependabot/fetch-metadata"
-      - dependency-name: "google-github-actions/release-please-action"
-
-  # For all other GitHub Actions, use 'deps', which triggers a release.
   - package-ecosystem: "github-actions"
     directory: "/.github/workflows"
     schedule:
       interval: "daily"
     commit-message:
       prefix: deps
-    ignore:
-      - dependency-name: "dependabot/fetch-metadata"
-      - dependency-name: "google-github-actions/release-please-action"
+
