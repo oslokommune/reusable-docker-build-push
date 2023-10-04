@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.1](https://github.com/oslokommune/reusable-docker-build-push/compare/v1.2.0...v1.2.1) (2023-10-04)
+
+
+### Dependency Updates
+
+* Bump aws-actions/configure-aws-credentials in /.github/workflows ([#26](https://github.com/oslokommune/reusable-docker-build-push/issues/26)) ([5d22c6f](https://github.com/oslokommune/reusable-docker-build-push/commit/5d22c6fae5c4128b50343ffc14188c763ce8bcbc))
+* Bump docker/setup-buildx-action in /.github/workflows ([#22](https://github.com/oslokommune/reusable-docker-build-push/issues/22)) ([471571c](https://github.com/oslokommune/reusable-docker-build-push/commit/471571cd6be09ca3254c025e7f8c1053d2ff9a39))
+
 ## [1.2.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v1.1.2...v1.2.0) (2023-10-04)
 
 
