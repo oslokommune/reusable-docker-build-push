@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v1.1.2...v1.2.0) (2023-10-04)
+
+
+### Dependency Updates
+
+* Bump actions/checkout from 4.0.0 to 4.1.0 in /.github/workflows ([e8920cb](https://github.com/oslokommune/reusable-docker-build-push/commit/e8920cb53f6fc80115f9eb288e32cb825b285435))
+* Bump aws-actions/amazon-ecr-login in /.github/workflows ([#25](https://github.com/oslokommune/reusable-docker-build-push/issues/25)) ([5f63d8c](https://github.com/oslokommune/reusable-docker-build-push/commit/5f63d8c45133c846bde0c10bfc80b348e5d77156))
+
+
+### Features
+
+* Set mask-password explicitly ([#27](https://github.com/oslokommune/reusable-docker-build-push/issues/27)) ([448ba12](https://github.com/oslokommune/reusable-docker-build-push/commit/448ba127ebbfd3f79f7ea5165218292c0cb7b07e))
+
 ## [1.1.2](https://github.com/oslokommune/reusable-docker-build-push/compare/v1.1.1...v1.1.2) (2023-09-28)
 
 
