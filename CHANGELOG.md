@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v1.2.1...v2.0.0) (2023-10-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* Add separate toggles for AWS ECR and GHCR ([#32](https://github.com/oslokommune/reusable-docker-build-push/issues/32))
+
+### Features
+
+* Add separate toggles for AWS ECR and GHCR ([#32](https://github.com/oslokommune/reusable-docker-build-push/issues/32)) ([8a93c3e](https://github.com/oslokommune/reusable-docker-build-push/commit/8a93c3e1ef78d5a2da98ba251e23840352de8fda))
+
 ## [1.2.1](https://github.com/oslokommune/reusable-docker-build-push/compare/v1.2.0...v1.2.1) (2023-10-04)
 
 
