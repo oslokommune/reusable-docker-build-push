@@ -56,16 +56,14 @@ on:
         default: Dockerfile
         type: string
 
-
       platforms:
-        description: > 
+        description: >
           Platform identifiers to build for.
         required: false
         type: string
         # common ones: linux/amd64,linux/arm64,linux/arm/v7
         default: linux/amd64
-  
-  
+
       build_args:
         description: >
           List of build-time variables. `IMAGE_CREATED_DATETIME`, `IMAGE_VERSION` and `IMAGE_REVISION` are added automatically.
@@ -85,17 +83,17 @@ on:
           type=raw,value=gha-${{ github.run_id }}
           type=semver,pattern={{version}}
 
-      push:
+      aws_ecr_login:
+        description: Log into AWS Elastic Container Registry (ECR).
+        required: false
+        default: true
+        type: boolean
+
+      aws_ecr_push:
         description: >
           Push the Docker image to one or more registries.
         required: false
         default: false
-        type: boolean
-
-      aws_ecr_enable:
-        description: Log into AWS Elastic Container Registry (ECR).
-        required: false
-        default: true
         type: boolean
 
       ecr_repository_name:
@@ -104,8 +102,14 @@ on:
         required: false
         type: string
 
-      ghcr_enable:
-        description: Log into GitHub Container Registry (GHCR).
+      ghcr_login:
+        description: Login to the GitHub Container Registry (GHCR).
+        required: false
+        default: false
+        type: boolean
+
+      ghcr_push:
+        description: Push to the GitHub Container Registry (GHCR).
         required: false
         default: false
         type: boolean
@@ -173,7 +177,7 @@ jobs:
           ref: ${{ inputs.git_ref || github.sha }}
 
 
-      - if: inputs.aws_ecr_enable
+      - if: inputs.aws_ecr_login
         name: Configure AWS credentials using the OpenID Connect (OIDC) provider 🔑
         uses: aws-actions/configure-aws-credentials@010d0da01d0b5a38af31e9c3470dbfdabdecca3a # v4.0.1
         with:
@@ -182,7 +186,7 @@ jobs:
           role-session-name: ${{ inputs.role_session_name || github.event.repository.name }}
 
 
-      - if: inputs.aws_ecr_enable
+      - if: inputs.aws_ecr_login
         name: Login to Elastic Container Registry (ECR) 🔑
         id: ecr-login
         uses: aws-actions/amazon-ecr-login@062b18b96a7aff071d4dc91bc00c4c1a7945b076 # v2.0.1
@@ -190,12 +194,12 @@ jobs:
           mask-password: "true"
 
 
-      - if: inputs.aws_ecr_enable
+      - if: inputs.aws_ecr_push
         name: Set ECR registry ⚙
         run: echo "ECR_REGISTRY=${{ steps.ecr-login.outputs.registry }}/${{ inputs.ecr_repository_name || github.event.repository.name }}" >> "$GITHUB_ENV"
 
 
-      - if: inputs.ghcr_enable
+      - if: inputs.ghcr_login
         name: Login to GitHub Container Registry (GHCR) 🔑
         uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
         with:
@@ -204,7 +208,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
 
-      - if: inputs.ghcr_enable
+      - if: inputs.ghcr_push
         name: Set GHCR registry ⚙
         run: echo "GHCR_REGISTRY=ghcr.io/${{ inputs.ghcr_image_name || github.repository }}" >> "$GITHUB_ENV"
 
@@ -251,8 +255,8 @@ jobs:
           tags: ${{ steps.docker-meta.outputs.tags }}
           labels: ${{ steps.docker-meta.outputs.labels }}
 
-          load: ${{ inputs.push == false }}
-          push: ${{ inputs.push }}
+          load: false
+          push: ${{ inputs.aws_ecr_push || inputs.ghcr_push }}
 
 
       - name: Write job summary 📝
