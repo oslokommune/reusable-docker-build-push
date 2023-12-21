@@ -5,7 +5,7 @@
   "separate-pull-requests": false,
   "packages": {
     ".": {
-      "component": "reusable-docker-build-push",
+      "component": "",
       "release-type": "simple",
       "changelog-sections": [
         { "type": "feat", "section": "Features" },
