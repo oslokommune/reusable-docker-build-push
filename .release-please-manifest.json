@@ -1,3 +1,4 @@
 {
-  "reusable-docker-build-push": "2.0.2"
+  "reusable-docker-build-push": "2.0.2",
+  ".": "1.0.0"
 }
