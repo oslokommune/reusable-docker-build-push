@@ -4,11 +4,9 @@
   "release-type": "simple",
   "separate-pull-requests": false,
   "packages": {
-    ".github/workflows": {
+    ".": {
       "component": "reusable-docker-build-push",
       "release-type": "simple",
-      "changelog-path": "CHANGELOG.md",
-      "version-file": "version.txt",
       "changelog-sections": [
         { "type": "feat", "section": "Features" },
         { "type": "fix", "section": "Bug Fixes" },
