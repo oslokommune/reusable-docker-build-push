@@ -4,7 +4,7 @@
   "release-type": "simple",
   "separate-pull-requests": false,
   "packages": {
-    "reusable-docker-build-push": {
+    ".github/workflows": {
       "component": "reusable-docker-build-push",
       "release-type": "simple",
       "changelog-sections": [
