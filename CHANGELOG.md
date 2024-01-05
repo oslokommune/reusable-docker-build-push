@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.4](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.0.3...v2.0.4) (2024-01-05)
+
+
+### Dependency Updates
+
+* Bump docker/metadata-action in /.github/workflows ([#48](https://github.com/oslokommune/reusable-docker-build-push/issues/48)) ([4fb7e79](https://github.com/oslokommune/reusable-docker-build-push/commit/4fb7e79aaab26a2ec18b63fbc55a030ea9b60f60))
+
 ## [2.0.3](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.0.2...v2.0.3) (2023-12-21)
 
 
