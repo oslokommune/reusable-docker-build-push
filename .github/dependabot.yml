@@ -2,9 +2,29 @@ version: 2
 updates:
 
   - package-ecosystem: "github-actions"
-    directory: "/.github/workflows"
+    directory: "/"
     schedule:
       interval: "daily"
+    allow:
+      - dependency-name: "oslokommune/*"
+    groups:
+      github-actions-releseable:
+        patterns:
+          - "reusable-docker-build-push.yml"
     commit-message:
       prefix: deps
 
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    allow:
+      - dependency-name: "oslokommune/*"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "reusable-docker-build-push.yml"
+    commit-message:
+      prefix: ci(deps)
