@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.0.4...v2.1.0) (2024-01-26)
+
+
+### Features
+
+* Add additional build arguments ([#50](https://github.com/oslokommune/reusable-docker-build-push/issues/50)) ([7eff07e](https://github.com/oslokommune/reusable-docker-build-push/commit/7eff07e01639b2e747570aac81fe4b4db0ad3961))
+* Change the repository build argument to be more specific ([0536e3b](https://github.com/oslokommune/reusable-docker-build-push/commit/0536e3b060d3dcd354233d72ddd26892b1e0ae3b))
+
 ## [2.0.4](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.0.3...v2.0.4) (2024-01-05)
 
 
