@@ -242,6 +242,8 @@ jobs:
           platforms: ${{ inputs.platforms }}
           provenance: false
           build-args: |
+            ECR_REPOSITORY_NAME=${{ inputs.ecr_repository_name }}
+            GHCR_IMAGE_NAME=${{ inputs.ghcr_image_name || github.repository }}
             IMAGE_CREATED_DATETIME=${{ fromJSON(steps.docker-meta.outputs.json).labels['org.opencontainers.image.created'] }}
             IMAGE_VERSION=${{ fromJSON(steps.docker-meta.outputs.json).labels['org.opencontainers.image.version'] }}
             IMAGE_REVISION=${{ fromJSON(steps.docker-meta.outputs.json).labels['org.opencontainers.image.revision'] }}
