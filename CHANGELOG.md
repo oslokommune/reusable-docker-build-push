@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.1.0...v2.2.0) (2024-01-30)
+
+
+### Features
+
+* Add image repository metadata as build args ([#52](https://github.com/oslokommune/reusable-docker-build-push/issues/52)) ([579ba68](https://github.com/oslokommune/reusable-docker-build-push/commit/579ba6894cd33aea5fe81fbe5d7ef1d137152b5f))
+
 ## [2.1.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.0.4...v2.1.0) (2024-01-26)
 
 
