@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.2.0...v2.3.0) (2024-02-02)
+
+
+### Features
+
+* Add image digest metadata as build arg ([608488b](https://github.com/oslokommune/reusable-docker-build-push/commit/608488b35f7ba1841ac2b5b47506e38614ed577b))
+
 ## [2.2.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.1.0...v2.2.0) (2024-01-30)
 
 
