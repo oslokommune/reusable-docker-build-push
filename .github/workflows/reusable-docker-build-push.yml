@@ -247,6 +247,7 @@ jobs:
             IMAGE_CREATED_DATETIME=${{ fromJSON(steps.docker-meta.outputs.json).labels['org.opencontainers.image.created'] }}
             IMAGE_VERSION=${{ fromJSON(steps.docker-meta.outputs.json).labels['org.opencontainers.image.version'] }}
             IMAGE_REVISION=${{ fromJSON(steps.docker-meta.outputs.json).labels['org.opencontainers.image.revision'] }}
+            IMAGE_DIGEST=${{ fromJSON(steps.docker-meta.outputs.json).labels['org.opencontainers.image.digest'] }}
             GITHUB_REPOSITORY=${{ github.repository }}
             GIT_COMMIT_SHA=${{ github.sha }}
             GIT_BEFORE_SHA=${{ github.event.before }}
