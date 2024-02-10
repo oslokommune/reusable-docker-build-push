@@ -166,7 +166,7 @@ jobs:
       image_version: ${{ steps.docker-meta.outputs.version }}
       image_tags: ${{ steps.docker-meta.outputs.tags }}
       image_id: ${{ steps.build-push.outputs.imageid }}
-      image_digest: ${{ steps.build-push.outputs.digest}}
+      image_digest: ${{ steps.build-push.outputs.digest }}
       docker_build_metadata: ${{ steps.build-push.outputs.metadata }}
 
     steps:
