@@ -66,7 +66,7 @@ on:
 
       build_args:
         description: >
-          List of build-time variables. `IMAGE_CREATED_DATETIME`, `IMAGE_VERSION` and `IMAGE_REVISION` are added automatically.
+          List of build-time variables. `IMAGE_CREATED_DATETIME`, `IMAGE_VERSION`, `IMAGE_REVISION` and `IMAGE_DIGEST` are added automatically.
         required: false
         type: string
 
