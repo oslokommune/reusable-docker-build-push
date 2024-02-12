@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.3.1](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.3.0...v2.3.1) (2024-02-10)
+
+
+### Bug Fixes
+
+* Add space before curly brace for image_digest ([b0cad9c](https://github.com/oslokommune/reusable-docker-build-push/commit/b0cad9c84f36ba84e8867ec2db9bf55bdb951f97))
+
+
+### Dependency Updates
+
+* Bump docker/metadata-action in /.github/workflows ([#54](https://github.com/oslokommune/reusable-docker-build-push/issues/54)) ([14a7a8f](https://github.com/oslokommune/reusable-docker-build-push/commit/14a7a8fe1a93720ce801d24651cdfeff8aa3fee9))
+
 ## [2.3.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.2.0...v2.3.0) (2024-02-02)
 
 
