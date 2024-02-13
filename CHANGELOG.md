@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.3.2](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.3.1...v2.3.2) (2024-02-13)
+
+
+### Bug Fixes
+
+* Remove non-functional IMAGE_DIGEST ([#59](https://github.com/oslokommune/reusable-docker-build-push/issues/59)) ([167e598](https://github.com/oslokommune/reusable-docker-build-push/commit/167e5986cdd338dc1c49358a2c2410386f619ee2))
+
+
+### Dependency Updates
+
+* Bump aws-actions/configure-aws-credentials in /.github/workflows ([#58](https://github.com/oslokommune/reusable-docker-build-push/issues/58)) ([7e9676a](https://github.com/oslokommune/reusable-docker-build-push/commit/7e9676a09f4858fc108c6fb68384240817e7fbf4))
+
 ## [2.3.1](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.3.0...v2.3.1) (2024-02-10)
 
 
