@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.3.2...v2.4.0) (2024-02-23)
+
+
+### Features
+
+* Add inputs for SBOM and provenance ([#61](https://github.com/oslokommune/reusable-docker-build-push/issues/61)) ([a5a7fc9](https://github.com/oslokommune/reusable-docker-build-push/commit/a5a7fc91ebdb33fa5eff1393db58e189a575f364))
+
 ## [2.3.2](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.3.1...v2.3.2) (2024-02-13)
 
 
