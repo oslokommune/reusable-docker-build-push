@@ -70,6 +70,18 @@ on:
         required: false
         type: string
 
+      sbom:
+        description: "Generate SBOM attestation for the build (shorthand for --attest=type=sbom)"
+        required: false
+        type: boolean
+        default: false
+
+      provenance:
+        description: "Generate provenance attestation for the build (shorthand for --attest=type=provenance)"
+        required: false
+        type: boolean
+        default: false
+
       tag_rules:
         # https://github.com/marketplace/actions/docker-metadata-action#tags-input
         # Priority affects tags order so image version will be set based on the higher one.
@@ -240,7 +252,8 @@ jobs:
           context: ${{ inputs.context }}
           file: ${{ inputs.file }}
           platforms: ${{ inputs.platforms }}
-          provenance: false
+          provenance: ${{ inputs.provenance }}
+          sbom: ${{ inputs.sbom }}
           build-args: |
             ECR_REPOSITORY_NAME=${{ inputs.ecr_repository_name }}
             GHCR_IMAGE_NAME=${{ inputs.ghcr_image_name || github.repository }}
