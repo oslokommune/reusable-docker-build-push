@@ -245,6 +245,61 @@ jobs:
         uses: docker/setup-buildx-action@d70bba72b1f3fd22344832f00baa16ece964efeb # v3.3.0
 
 
+      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        name: Cache Gradle build files
+        id: cache-gradle
+        with:
+          path: |
+            gradle-home
+          key: cache-gradle-${{ hashFiles('build.gradle.kts') }}
+          restore-keys: |
+            cache-gradle-
+
+
+      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        name: Cache files from Alpine Package Keeper (APK)
+        id: cache-apk
+        with:
+          path: |
+            var-cache-apk
+            var-lib-apk
+          key: cache-apk-${{ hashFiles('Dockerfile-km') }}
+          restore-keys: |
+            cache-apk-
+
+
+      - name: Inject Gradle cache into docker
+        uses: reproducible-containers/buildkit-cache-dance@87e6a3bbd976a1476e29b60fe743ab0977034ff5 # v3.1.1
+        with:
+          cache-map: |
+            {
+              "gradle-home": {
+                "target": "/gradle/home",
+                "id": "gradle-cache"
+              }
+            }
+          save-always: "false"
+          skip-extraction: ${{ steps.cache-gradle.outputs.cache-hit }}
+
+
+      - name: Inject APK cache into Docker
+        uses: reproducible-containers/buildkit-cache-dance@87e6a3bbd976a1476e29b60fe743ab0977034ff5 # v3.1.1
+        with:
+          cache-map: |
+              {
+                  "var-cache-apk": {
+                      "target": "/var/cache/apk",
+                      "id": "apk-cache"
+                  },
+                  "var-lib-apk": {
+                      "target": "/var/lib/apk",
+                      "id": "apk-lib"
+                  }
+              }
+          save-always: "false"
+          skip-extraction: ${{ steps.cache-apk.outputs.cache-hit }}
+
+
       - name: Build and push (if enabled) Docker image to one or more registries 🚀
         id: build-push
         uses: docker/build-push-action@2cdde995de11925a030ce8070c3d77a52ffcf1c0 # v5.3.0
