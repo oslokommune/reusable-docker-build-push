@@ -246,7 +246,7 @@ jobs:
 
 
       - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
-        name: Cache Gradle build files
+        name: Handle cache for Gradle build
         id: cache-gradle
         with:
           path: |
@@ -257,7 +257,7 @@ jobs:
 
 
       - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
-        name: Cache files from Alpine Package Keeper (APK)
+        name: Handle cache for Alpine Package Keeper (APK)
         id: cache-apk
         with:
           path: |
@@ -324,8 +324,17 @@ jobs:
           secrets: ${{ secrets.DOCKER_SECRETS }}
 
           # https://docs.docker.com/build/ci/github-actions/examples/#cache
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          # https://aws.amazon.com/blogs/containers/announcing-remote-cache-support-in-amazon-ecr-for-buildkit-clients/
+          cache-from: >
+              type=registry,
+              ref=${{ env.ECR_REGISTRY }}:cache,
+              mode=max,
+              image-manifest=true,
+              oci-mediatypes=true
+
+          cache-to: >
+              type=registry,
+              ref=${{ env.ECR_REGISTRY }}:cache
 
           tags: ${{ steps.docker-meta.outputs.tags }}
           labels: ${{ steps.docker-meta.outputs.labels }}
