@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.3](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.4.2...v2.4.3) (2024-05-07)
+
+
+### Dependency Updates
+
+* Bump dependabot/fetch-metadata in /.github/workflows ([#76](https://github.com/oslokommune/reusable-docker-build-push/issues/76)) ([5acaafb](https://github.com/oslokommune/reusable-docker-build-push/commit/5acaafbf75012c2615d250de6c180c38c15fed05))
+
 ## [2.4.2](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.4.1...v2.4.2) (2024-04-16)
 
 
