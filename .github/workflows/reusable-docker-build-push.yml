@@ -157,7 +157,6 @@ on:
       maven_build_file_pattern:
         description: >
           Glob pattern to match the Maven build file.
-        required: true
         type: string
         default: '**/pom.xml'
 
