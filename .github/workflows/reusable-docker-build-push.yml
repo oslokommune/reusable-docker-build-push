@@ -137,13 +137,12 @@ on:
           Enable or disable the use of a persistent Gradle directory cache.
 
           Mount the cache into the container using the `--mount` flag with the `RUN` instruction in the Dockerfile. The cache must be in the default location (`/root/.gradle`) and have an ID of `gradle-cache`.
-        required: true
+        default: false
         type: boolean
 
       gradle_build_file_pattern:
         description: >
           Glob pattern to match the Gradle build file.
-        required: true
         type: string
         default: '**/build.gradle'
 
@@ -152,7 +151,7 @@ on:
           Enable or disable the use of a persistent Maven directory cache.
 
           Mount the cache into the container using the `--mount` flag with the `RUN` instruction in the Dockerfile. The cache must be in the default location (`/root/.m2`) and have an ID of `maven-cache`.
-        required: true
+        default: false
         type: boolean
 
       maven_build_file_pattern:
