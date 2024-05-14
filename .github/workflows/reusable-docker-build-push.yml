@@ -312,8 +312,8 @@ jobs:
             cache-gradle-
 
 
-      - if: ${{ inputs.gradle_cache }} ⚙
-        name: Inject Gradle cache into Docker
+      - if: ${{ inputs.gradle_cache }}
+        name: Inject Gradle cache into Docker ⚙
         uses: reproducible-containers/buildkit-cache-dance@87e6a3bbd976a1476e29b60fe743ab0977034ff5 # v3.1.1
         with:
           cache-map: |
