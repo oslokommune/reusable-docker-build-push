@@ -132,6 +132,48 @@ on:
         required: false
         type: string
 
+      gradle_cache:
+        description: |
+          Enable or disable the use of a persistent Gradle directory cache.
+
+          Mount the cache into the container using the `--mount` flag with the `RUN` instruction in the Dockerfile. The cache must be in the default location (`/root/.gradle`) and have an ID of `gradle-cache`.
+        default: false
+        type: boolean
+
+      gradle_build_file_pattern:
+        description: >
+          Glob pattern to match the Gradle build file.
+        type: string
+        default: '**/build.gradle'
+
+      maven_cache:
+        description: |
+          Enable or disable the use of a persistent Maven directory cache.
+
+          Mount the cache into the container using the `--mount` flag with the `RUN` instruction in the Dockerfile. The cache must be in the default location (`/root/.m2`) and have an ID of `maven-cache`.
+        default: false
+        type: boolean
+
+      maven_build_file_pattern:
+        description: >
+          Glob pattern to match the Maven build file.
+        type: string
+        default: '**/pom.xml'
+
+      pip_cache:
+        description: |
+          Enable or disable the use of a persistent Pip directory cache.
+
+          Mount the cache into the container using the `--mount` flag with the `RUN` instruction in the Dockerfile. The cache must be in the default location (`/root/.cache/pip`) and have an ID of `pip-cache`.
+        default: false
+        type: boolean
+
+      pip_requirements_file_pattern:
+        description: >
+          Glob pattern to match the Pip requirements file.
+        type: string
+        default: '**/requirements.txt'
+
     outputs:
 
       image_version:
@@ -245,6 +287,87 @@ jobs:
         uses: docker/setup-buildx-action@d70bba72b1f3fd22344832f00baa16ece964efeb # v3.3.0
 
 
+      - if: ${{ inputs.maven_cache }}
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        name: Handle cache for Maven ⚙
+        id: cache-maven
+        with:
+          key: cache-maven-${{ hashFiles(inputs.maven_build_file_pattern) }}
+          path: |
+            root-m2
+          restore-keys: |
+            cache-maven-
+
+
+      - if: ${{ inputs.maven_cache }}
+        name: Inject Maven cache into Docker ⚙
+        uses: reproducible-containers/buildkit-cache-dance@87e6a3bbd976a1476e29b60fe743ab0977034ff5 # v3.1.1
+        with:
+          cache-map: |
+            {
+              "root-m2": {
+                "target": "/root/.m2",
+                "id": "maven-cache"
+              }
+            }
+          save-always: "false"
+          skip-extraction: ${{ steps.cache-maven.outputs.cache-hit }}
+
+
+      - if: ${{ inputs.gradle_cache }}
+        name: Handle cache for Gradle ⚙
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        id: cache-gradle
+        with:
+          key: cache-gradle-${{ hashFiles(inputs.gradle_build_file_pattern) }}
+          path: |
+            root-gradle
+          restore-keys: |
+            cache-gradle-
+
+
+      - if: ${{ inputs.gradle_cache }}
+        name: Inject Gradle cache into Docker ⚙
+        uses: reproducible-containers/buildkit-cache-dance@87e6a3bbd976a1476e29b60fe743ab0977034ff5 # v3.1.1
+        with:
+          cache-map: |
+            {
+              "root-gradle": {
+                "target": "/root/.gradle",
+                "id": "gradle-cache"
+              }
+            }
+          save-always: "false"
+          skip-extraction: ${{ steps.cache-gradle.outputs.cache-hit }}
+
+
+      - if: ${{ inputs.pip_cache }}
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        name: Handle cache for Pip ⚙
+        id: cache-pip
+        with:
+          key: cache-pip-${{ hashFiles(inputs.pip_requirements_file_pattern) }}
+          path: |
+            root-cache-pip
+          restore-keys: |
+            cache-pip-
+
+
+      - if: ${{ inputs.pip_cache }}
+        name: Inject Pip cache into Docker ⚙
+        uses: reproducible-containers/buildkit-cache-dance@87e6a3bbd976a1476e29b60fe743ab0977034ff5 # v3.1.1
+        with:
+          cache-map: |
+            {
+              "root-cache-pip": {
+                "target": "/root/.cache/pip",
+                "id": "pip-cache"
+              }
+            }
+          save-always: "false"
+          skip-extraction: ${{ steps.cache-pip.outputs.cache-hit }}
+
+
       - name: Build and push (if enabled) Docker image to one or more registries 🚀
         id: build-push
         uses: docker/build-push-action@2cdde995de11925a030ce8070c3d77a52ffcf1c0 # v5.3.0
@@ -282,7 +405,7 @@ jobs:
       - name: Write job summary 📝
         run: |
           cat >> "$GITHUB_STEP_SUMMARY" <<EOF
-          Image version (use this to find the image in the ECR repository):
+          Image version (use this to find the image in the repository):
 
           \`\`\`text
           ${{ steps.docker-meta.outputs.version }}
