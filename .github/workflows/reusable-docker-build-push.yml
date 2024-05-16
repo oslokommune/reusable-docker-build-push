@@ -140,11 +140,11 @@ on:
         default: false
         type: boolean
 
-      gradle_cache_key_suffix:
+      gradle_build_file_pattern:
         description: >
-          Suffix to be added to the Gradle cache key.
+          Glob pattern to match the Gradle build file.
         type: string
-        default: ''
+        default: '**/build.gradle'
 
       maven_cache:
         description: |
@@ -154,11 +154,11 @@ on:
         default: false
         type: boolean
 
-      maven_cache_key_suffix:
+      maven_build_file_pattern:
         description: >
-          Suffix to be added to the Maven cache key.
+          Glob pattern to match the Maven build file.
         type: string
-        default: ''
+        default: '**/pom.xml'
 
       pip_cache:
         description: |
@@ -168,11 +168,11 @@ on:
         default: false
         type: boolean
 
-      pip_cache_key_suffix:
+      pip_requirements_file_pattern:
         description: >
-          Suffix to be added to the Pip cache key.
+          Glob pattern to match the Pip requirements file.
         type: string
-        default: ''
+        default: '**/requirements.txt'
 
     outputs:
 
@@ -292,7 +292,7 @@ jobs:
         name: Handle cache for Maven ⚙
         id: cache-maven
         with:
-          key: cache-maven-${{ inputs.maven_cache_key_suffix }}
+          key: cache-maven-${{ hashFiles(inputs.maven_build_file_pattern) }}
           path: |
             root-m2
           restore-keys: |
@@ -319,7 +319,7 @@ jobs:
         uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
         id: cache-gradle
         with:
-          key: cache-gradle-${{ inputs.gradle_cache_key_suffix }}
+          key: cache-gradle-${{ hashFiles(inputs.gradle_build_file_pattern) }}
           path: |
             root-gradle
           restore-keys: |
@@ -346,7 +346,7 @@ jobs:
         name: Handle cache for Pip ⚙
         id: cache-pip
         with:
-          key: cache-pip-${{ inputs.pip_cache_key_suffix }}
+          key: cache-pip-${{ hashFiles(inputs.pip_requirements_file_pattern) }}
           path: |
             root-cache-pip
           restore-keys: |
