@@ -160,6 +160,20 @@ on:
         type: string
         default: '**/pom.xml'
 
+      pip_cache:
+        description: |
+          Enable or disable the use of a persistent Pip directory cache.
+
+          Mount the cache into the container using the `--mount` flag with the `RUN` instruction in the Dockerfile. The cache must be in the default location (`/root/.cache/pip`) and have an ID of `pip-cache`.
+        default: false
+        type: boolean
+
+      pip_requirements_file_pattern:
+        description: >
+          Glob pattern to match the Pip requirements file.
+        type: string
+        default: '**/requirements.txt'
+
     outputs:
 
       image_version:
@@ -325,6 +339,33 @@ jobs:
             }
           save-always: "false"
           skip-extraction: ${{ steps.cache-gradle.outputs.cache-hit }}
+
+
+      - if: ${{ inputs.pip_cache }}
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        name: Handle cache for Pip ⚙
+        id: cache-pip
+        with:
+          key: cache-pip-${{ hashFiles(inputs.pip_requirements_file_pattern) }}
+          path: |
+            root-cache-pip
+          restore-keys: |
+            cache-pip-
+
+
+      - if: ${{ inputs.pip_cache }}
+        name: Inject Pip cache into Docker ⚙
+        uses: reproducible-containers/buildkit-cache-dance@87e6a3bbd976a1476e29b60fe743ab0977034ff5 # v3.1.1
+        with:
+          cache-map: |
+            {
+              "root-cache-pip": {
+                "target": "/root/.cache/pip",
+                "id": "pip-cache"
+              }
+            }
+          save-always: "false"
+          skip-extraction: ${{ steps.cache-pip.outputs.cache-hit }}
 
 
       - name: Build and push (if enabled) Docker image to one or more registries 🚀
