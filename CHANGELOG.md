@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.4.3...v2.5.0) (2024-05-16)
+
+
+### Features
+
+* Add cache mount support for Gradle, Maven and pip ([#81](https://github.com/oslokommune/reusable-docker-build-push/issues/81)) ([043a7d0](https://github.com/oslokommune/reusable-docker-build-push/commit/043a7d051dfdaff53d54f042f9360c34a04e5873))
+
 ## [2.4.3](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.4.2...v2.4.3) (2024-05-07)
 
 
