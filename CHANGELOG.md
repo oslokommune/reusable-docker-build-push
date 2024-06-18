@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.5.1](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.5.0...v2.5.1) (2024-06-18)
+
+
+### Dependency Updates
+
+* Bump actions/checkout from 4.1.5 to 4.1.6 in /.github/workflows ([03a81eb](https://github.com/oslokommune/reusable-docker-build-push/commit/03a81eb911cece57f6b437f1c089b2f369492bcb))
+* Bump docker/build-push-action in /.github/workflows ([#87](https://github.com/oslokommune/reusable-docker-build-push/issues/87)) ([e90e0eb](https://github.com/oslokommune/reusable-docker-build-push/commit/e90e0ebbee007c4b2211a2d99316e10d8ee192d9))
+
 ## [2.5.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.4.3...v2.5.0) (2024-05-16)
 
 
