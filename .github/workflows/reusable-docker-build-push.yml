@@ -315,7 +315,7 @@ jobs:
 
       - if: ${{ inputs.maven_cache }}
         name: Inject Maven cache into Docker ⚙
-        uses: reproducible-containers/buildkit-cache-dance@87e6a3bbd976a1476e29b60fe743ab0977034ff5 # v3.1.1
+        uses: reproducible-containers/buildkit-cache-dance@5b6db76d1da5c8b307d5d2e0706d266521b710de # v3.1.2
         with:
           cache-map: |
             {
@@ -342,7 +342,7 @@ jobs:
 
       - if: ${{ inputs.gradle_cache }}
         name: Inject Gradle cache into Docker ⚙
-        uses: reproducible-containers/buildkit-cache-dance@87e6a3bbd976a1476e29b60fe743ab0977034ff5 # v3.1.1
+        uses: reproducible-containers/buildkit-cache-dance@5b6db76d1da5c8b307d5d2e0706d266521b710de # v3.1.2
         with:
           cache-map: |
             {
@@ -369,7 +369,7 @@ jobs:
 
       - if: ${{ inputs.pip_cache }}
         name: Inject Pip cache into Docker ⚙
-        uses: reproducible-containers/buildkit-cache-dance@87e6a3bbd976a1476e29b60fe743ab0977034ff5 # v3.1.1
+        uses: reproducible-containers/buildkit-cache-dance@5b6db76d1da5c8b307d5d2e0706d266521b710de # v3.1.2
         with:
           cache-map: |
             {
@@ -396,7 +396,7 @@ jobs:
 
       - if: ${{ inputs.npm_cache }}
         name: Inject npm cache into Docker ⚙
-        uses: reproducible-containers/buildkit-cache-dance@87e6a3bbd976a1476e29b60fe743ab0977034ff5 # v3.1.1
+        uses: reproducible-containers/buildkit-cache-dance@5b6db76d1da5c8b307d5d2e0706d266521b710de # v3.1.2
         with:
           cache-map: |
             {
