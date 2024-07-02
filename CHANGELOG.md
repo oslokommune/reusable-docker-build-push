@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.5.3...v2.6.0) (2024-07-01)
+
+
+### Features
+
+* Add support for npm cache ([#95](https://github.com/oslokommune/reusable-docker-build-push/issues/95)) ([20bede7](https://github.com/oslokommune/reusable-docker-build-push/commit/20bede782794d8d3dc43a0aa20e4c3c4a41919b1))
+
 ## [2.5.3](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.5.2...v2.5.3) (2024-06-27)
 
 
