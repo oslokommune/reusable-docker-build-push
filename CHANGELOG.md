@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.1](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.6.0...v2.6.1) (2024-07-05)
+
+
+### Dependency Updates
+
+* Bump reproducible-containers/buildkit-cache-dance ([#96](https://github.com/oslokommune/reusable-docker-build-push/issues/96)) ([f6da1e0](https://github.com/oslokommune/reusable-docker-build-push/commit/f6da1e0fa87d8139799950b1f363b190b6be0de7))
+
 ## [2.6.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.5.3...v2.6.0) (2024-07-01)
 
 
