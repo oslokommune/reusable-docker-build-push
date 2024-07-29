@@ -42,6 +42,20 @@ on:
         default: "eu-west-1"
         type: string
 
+      download_artifact:
+        description: >
+          If true, downloads all artifacts from previous jobs in the same workflow run and extracts them to the workspace. Set to false to skip downloading artifacts.
+        required: false
+        type: boolean
+        default: false
+
+      download_artifact_name:
+        description: >
+          Specifies the name of the artifact to download. Leave empty to download all artifacts.
+        default: ""
+        required: false
+        type: string
+
       context:
         description: >
           Docker context (path) to start build from.
@@ -279,6 +293,14 @@ jobs:
       - if: inputs.ghcr_push
         name: Set GHCR registry ⚙
         run: echo "GHCR_REGISTRY=ghcr.io/${{ inputs.ghcr_image_name || github.repository }}" >> "$GITHUB_ENV"
+
+
+      - if: inputs.download_artifact
+        name: Download artifacts 📦
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
+        with:
+          name: inputs.download_artifact_name
+          merge-multiple: true
 
 
       - name: Extract metadata (tags, labels) from Git reference and GitHub events ⚙️
