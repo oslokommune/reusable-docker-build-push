@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.7.1](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.7.0...v2.7.1) (2024-07-29)
+
+
+### Dependency Updates
+
+* Bump docker/build-push-action in /.github/workflows ([#106](https://github.com/oslokommune/reusable-docker-build-push/issues/106)) ([a8bad73](https://github.com/oslokommune/reusable-docker-build-push/commit/a8bad732e663d2f87462ca3a425cc52b07e78020))
+* Bump docker/setup-buildx-action in /.github/workflows ([#105](https://github.com/oslokommune/reusable-docker-build-push/issues/105)) ([ecf34c4](https://github.com/oslokommune/reusable-docker-build-push/commit/ecf34c41a4eebd13dbe23e8d4808f2adb28597f7))
+* Bump docker/setup-qemu-action in /.github/workflows ([#107](https://github.com/oslokommune/reusable-docker-build-push/issues/107)) ([733b9dc](https://github.com/oslokommune/reusable-docker-build-push/commit/733b9dc978660ef293852ab39af4d674ee7f7f53))
+
 ## [2.7.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.6.1...v2.7.0) (2024-07-29)
 
 
