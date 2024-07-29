@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.6.1...v2.7.0) (2024-07-29)
+
+
+### Features
+
+* Add options to download artifacts from previous jobs ([#108](https://github.com/oslokommune/reusable-docker-build-push/issues/108)) ([377009c](https://github.com/oslokommune/reusable-docker-build-push/commit/377009c0b60bed11bfe66543c13844cd735c0d24))
+
 ## [2.6.1](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.6.0...v2.6.1) (2024-07-05)
 
 
