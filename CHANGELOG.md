@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.3](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.7.2...v2.7.3) (2024-08-30)
+
+
+### Bug Fixes
+
+* Fix broken input variable download_artifact_name ([a378cc6](https://github.com/oslokommune/reusable-docker-build-push/commit/a378cc63d2b847ed83cc93575aeeded7ab3e52cf))
+
 ## [2.7.2](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.7.1...v2.7.2) (2024-08-08)
 
 
