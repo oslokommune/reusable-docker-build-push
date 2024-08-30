@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.7.3...v2.8.0) (2024-08-30)
+
+
+### Features
+
+* Add download_artifact_path input variable ([d8d6837](https://github.com/oslokommune/reusable-docker-build-push/commit/d8d683746e125e04b8bdc2b8a3113115f1a9cc96))
+
 ## [2.7.3](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.7.2...v2.7.3) (2024-08-30)
 
 
