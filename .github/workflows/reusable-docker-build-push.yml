@@ -56,6 +56,13 @@ on:
         required: false
         type: string
 
+      download_artifact_path:
+        description: >
+          Specifies the path to extract the downloaded artifact to. Leave empty to extract to the workspace.
+        default: ""
+        required: false
+        type: string
+
       context:
         description: >
           Docker context (path) to start build from.
@@ -300,6 +307,7 @@ jobs:
         uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
         with:
           name: ${{ inputs.download_artifact_name }}
+          path: ${{ inputs.download_artifact_path }}
           merge-multiple: true
 
 
