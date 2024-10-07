@@ -332,7 +332,7 @@ jobs:
 
 
       - if: ${{ inputs.maven_cache }}
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        uses: actions/cache@2cdf405574d6ef1f33a1d12acccd3ae82f47b3f2 # v4.1.0
         name: Handle cache for Maven ⚙
         id: cache-maven
         with:
@@ -360,7 +360,7 @@ jobs:
 
       - if: ${{ inputs.gradle_cache }}
         name: Handle cache for Gradle ⚙
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        uses: actions/cache@2cdf405574d6ef1f33a1d12acccd3ae82f47b3f2 # v4.1.0
         id: cache-gradle
         with:
           key: cache-gradle-${{ hashFiles(inputs.gradle_build_file_pattern) }}
@@ -386,7 +386,7 @@ jobs:
 
 
       - if: ${{ inputs.pip_cache }}
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        uses: actions/cache@2cdf405574d6ef1f33a1d12acccd3ae82f47b3f2 # v4.1.0
         name: Handle cache for Pip ⚙
         id: cache-pip
         with:
@@ -413,7 +413,7 @@ jobs:
 
 
       - if: ${{ inputs.npm_cache }}
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        uses: actions/cache@2cdf405574d6ef1f33a1d12acccd3ae82f47b3f2 # v4.1.0
         name: Handle cache for npm ⚙
         id: cache-npm
         with:
