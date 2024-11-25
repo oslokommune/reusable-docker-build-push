@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.9.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.8.1...v2.9.0) (2024-11-25)
+
+
+### Features
+
+* Add option to specify which runner to use ([#132](https://github.com/oslokommune/reusable-docker-build-push/issues/132)) ([7e855df](https://github.com/oslokommune/reusable-docker-build-push/commit/7e855df7bfed8c375428d8caa58841ecd599f137))
+
+
+### Dependency Updates
+
+* Bump actions/checkout from 4.1.7 to 4.2.0 in /.github/workflows ([#120](https://github.com/oslokommune/reusable-docker-build-push/issues/120)) ([a7bfb72](https://github.com/oslokommune/reusable-docker-build-push/commit/a7bfb72d6f59ac29444913c4f8c9490ae1708d89))
+* Bump docker/build-push-action in /.github/workflows ([#122](https://github.com/oslokommune/reusable-docker-build-push/issues/122)) ([ffdf655](https://github.com/oslokommune/reusable-docker-build-push/commit/ffdf655102198152e0fbd9766c455b6f6bf13f54))
+
 ## [2.8.1](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.8.0...v2.8.1) (2024-09-10)
 
 
