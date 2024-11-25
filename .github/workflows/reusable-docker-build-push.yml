@@ -23,6 +23,13 @@ on:
           The GitHub deployment environment to use. Leave empty to not use a deployment environment.
         type: string
 
+      runner:
+        description: >
+          Option to specify which runner to run the jobs on - for example if using self-hosted or custom runners.
+        required: false
+        type: string
+        default: ubuntu-latest
+
       git_ref:
         description: >
           The branch, tag or SHA to checkout. Default is the commit SHA that triggered the workflow.
@@ -242,7 +249,7 @@ jobs:
 
     name: Build and push the Docker image
 
-    runs-on: ubuntu-latest
+    runs-on: "${{ inputs.runner }}"
 
     permissions:
       id-token: write # For the GitHub's OIDC Token endpoint
