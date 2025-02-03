@@ -216,6 +216,20 @@ on:
         type: string
         default: '**/package.json'
 
+      go_cache:
+        description: |
+          Enable or disable the use of persistent Go directory caches.
+
+          Mount the caches into the container using the `--mount` flag with the `RUN` instruction in the Dockerfile. The caches must be in the default locations (`/root/.cache/go-build` and `/go/pkg/mod`) and have IDs of `go-build-cache` and `go-mod-cache` respectively.
+        default: false
+        type: boolean
+
+      go_mod_file_pattern:
+        description: >
+          Glob pattern to match the Go mod file.
+        type: string
+        default: '**/go.mod'
+
     outputs:
 
       image_version:
@@ -443,7 +457,38 @@ jobs:
               }
             }
           save-always: "false"
-          skip-extraction: ${{ steps.cache-npm.outputs.cache-hit }},
+          skip-extraction: ${{ steps.cache-npm.outputs.cache-hit }}
+
+
+      - if: ${{ inputs.go_cache }}
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        name: Handle cache for Go ⚙
+        id: cache-go
+        with:
+          key: cache-go-${{ hashFiles(inputs.go_mod_file_pattern) }}
+          path: |
+            root-go-build-cache
+            root-go-mod-cache
+          restore-keys: |
+            cache-go-
+
+      - if: ${{ inputs.go_cache }}
+        name: Inject Go caches into Docker ⚙
+        uses: reproducible-containers/buildkit-cache-dance@5b6db76d1da5c8b307d5d2e0706d266521b710de # v3.1.2
+        with:
+          cache-map: |
+            {
+              "root-go-build-cache": {
+                "target": "/root/.cache/go-build",
+                "id": "go-build-cache"
+              },
+              "root-go-mod-cache": {
+                "target": "/go/pkg/mod",
+                "id": "go-mod-cache"
+              }
+            }
+          save-always: "false"
+          skip-extraction: ${{ steps.cache-go.outputs.cache-hit }}
 
 
       - name: Build and push (if enabled) Docker image to one or more registries 🚀
