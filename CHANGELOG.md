@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.10.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.9.1...v2.10.0) (2025-02-04)
+
+
+### Features
+
+* Add support for Go cache ([5a3ad00](https://github.com/oslokommune/reusable-docker-build-push/commit/5a3ad00225e416ee274da264bc23b882cb1be723))
+* Use correct cache action version ([fc71511](https://github.com/oslokommune/reusable-docker-build-push/commit/fc71511e7e887b75fd7afe72e1b05ba2b694e780))
+
+
+### Dependency Updates
+
+* Bump aws-actions/configure-aws-credentials in /.github/workflows ([#142](https://github.com/oslokommune/reusable-docker-build-push/issues/142)) ([23e6e15](https://github.com/oslokommune/reusable-docker-build-push/commit/23e6e151511e3146c45bbf9d3d07a259a14012f8))
+* Bump dependabot/fetch-metadata in /.github/workflows ([#141](https://github.com/oslokommune/reusable-docker-build-push/issues/141)) ([cc96309](https://github.com/oslokommune/reusable-docker-build-push/commit/cc96309f2d29093c4066a8cff94d85eadc7999fb))
+* Bump docker/build-push-action in /.github/workflows ([#140](https://github.com/oslokommune/reusable-docker-build-push/issues/140)) ([e85d700](https://github.com/oslokommune/reusable-docker-build-push/commit/e85d700454d65c886f75cd8ece58f86a948af3a6))
+* Bump docker/setup-buildx-action in /.github/workflows ([#136](https://github.com/oslokommune/reusable-docker-build-push/issues/136)) ([787259f](https://github.com/oslokommune/reusable-docker-build-push/commit/787259f352a30595a5727212e83f943b6ddaaf87))
+* Bump docker/setup-qemu-action in /.github/workflows ([#138](https://github.com/oslokommune/reusable-docker-build-push/issues/138)) ([bd5b811](https://github.com/oslokommune/reusable-docker-build-push/commit/bd5b8118593aa5d89c6eb6c4b3003f0f7874cdda))
+
 ## [2.9.1](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.9.0...v2.9.1) (2024-12-11)
 
 
