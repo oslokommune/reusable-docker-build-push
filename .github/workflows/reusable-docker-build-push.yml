@@ -528,22 +528,28 @@ jobs:
       - name: Write job summary 📝
         run: |
           cat >> "$GITHUB_STEP_SUMMARY" <<EOF
+          
           Image version (use this to find the image in the repository):
 
           \`\`\`text
           ${{ steps.docker-meta.outputs.version }}
           \`\`\`
-
-          Image ID (hash of the local image JSON configuration):
-
-          \`\`\`text
-          ${{ steps.build-push.outputs.imageid }}
-          \`\`\`
-
+          
           Image digest (hash of the Docker manifest):
 
           \`\`\`text
           ${{ steps.build-push.outputs.digest }}
+          \`\`\`
+
+          # Build details
+          
+          <details>
+          <summary>Click to expand</summary>
+          
+          Image ID (hash of the local image JSON configuration):
+
+          \`\`\`text
+          ${{ steps.build-push.outputs.imageid }}
           \`\`\`
 
           Image tags:
@@ -563,4 +569,8 @@ jobs:
           \`\`\`json
           ${{ steps.build-push.outputs.metadata }}
           \`\`\`
+
+          </summary>
+          </details>
+
           EOF
