@@ -531,7 +531,7 @@ jobs:
         run: |
           cat >> "$GITHUB_STEP_SUMMARY" <<EOF
           
-          Image version (use this to find the image in the repository):
+          Image tag (use this to find the image in the ECR repository):
 
           \`\`\`text
           ${{ steps.docker-meta.outputs.version }}
@@ -543,7 +543,7 @@ jobs:
           ${{ steps.build-push.outputs.digest }}
           \`\`\`
 
-          # Build details
+          ### Build details
           
           <details>
           <summary>Click to expand</summary>
