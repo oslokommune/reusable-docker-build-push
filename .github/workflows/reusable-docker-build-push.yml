@@ -494,6 +494,8 @@ jobs:
       - name: Build and push (if enabled) Docker image to one or more registries 🚀
         id: build-push
         uses: docker/build-push-action@ca877d9245402d1537745e0e356eab47c3520991 # v6.13.0
+        env:
+          DOCKER_BUILD_SUMMARY: false
         with:
           context: ${{ inputs.context }}
           file: ${{ inputs.file }}
@@ -528,22 +530,28 @@ jobs:
       - name: Write job summary 📝
         run: |
           cat >> "$GITHUB_STEP_SUMMARY" <<EOF
-          Image version (use this to find the image in the repository):
+          
+          Image tag (use this to find the image in the ECR repository):
 
           \`\`\`text
           ${{ steps.docker-meta.outputs.version }}
           \`\`\`
-
-          Image ID (hash of the local image JSON configuration):
-
-          \`\`\`text
-          ${{ steps.build-push.outputs.imageid }}
-          \`\`\`
-
+          
           Image digest (hash of the Docker manifest):
 
           \`\`\`text
           ${{ steps.build-push.outputs.digest }}
+          \`\`\`
+
+          Build details
+          
+          <details>
+          <summary>Click to expand</summary>
+          
+          Image ID (hash of the local image JSON configuration):
+
+          \`\`\`text
+          ${{ steps.build-push.outputs.imageid }}
           \`\`\`
 
           Image tags:
@@ -563,4 +571,8 @@ jobs:
           \`\`\`json
           ${{ steps.build-push.outputs.metadata }}
           \`\`\`
+
+          </summary>
+          </details>
+
           EOF
