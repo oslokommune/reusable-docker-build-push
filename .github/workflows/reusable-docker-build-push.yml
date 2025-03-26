@@ -543,7 +543,7 @@ jobs:
           ${{ steps.build-push.outputs.digest }}
           \`\`\`
 
-          ### Build details
+          Build details
           
           <details>
           <summary>Click to expand</summary>
