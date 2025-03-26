@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.11.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.10.0...v2.11.0) (2025-03-26)
+
+
+### Features
+
+* Shorten job summary ([#155](https://github.com/oslokommune/reusable-docker-build-push/issues/155)) ([74f5e18](https://github.com/oslokommune/reusable-docker-build-push/commit/74f5e18cca013ae5799ff66fbeb3df456e32e8f0))
+
 ## [2.10.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.9.1...v2.10.0) (2025-02-04)
 
 
