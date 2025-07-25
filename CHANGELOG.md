@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.11.2](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.11.1...v2.11.2) (2025-07-25)
+
+
+### Dependency Updates
+
+* Bump actions/download-artifact in /.github/workflows ([#162](https://github.com/oslokommune/reusable-docker-build-push/issues/162)) ([659253d](https://github.com/oslokommune/reusable-docker-build-push/commit/659253d4b8421e6d60c3bacf5a3493ca756c1575))
+* Bump docker/login-action from 3.3.0 to 3.4.0 in /.github/workflows ([#160](https://github.com/oslokommune/reusable-docker-build-push/issues/160)) ([6d33522](https://github.com/oslokommune/reusable-docker-build-push/commit/6d33522fd3e84d11dda73b03cc3b090c3cfe00c0))
+* Bump docker/metadata-action in /.github/workflows ([#159](https://github.com/oslokommune/reusable-docker-build-push/issues/159)) ([347f677](https://github.com/oslokommune/reusable-docker-build-push/commit/347f677e5ab4597b7976106aafd236356a22e009))
+* Bump googleapis/release-please-action in /.github/workflows ([#161](https://github.com/oslokommune/reusable-docker-build-push/issues/161)) ([be930f7](https://github.com/oslokommune/reusable-docker-build-push/commit/be930f7fa7c03cd87200c430b49918a91b50ccbe))
+* Bump reproducible-containers/buildkit-cache-dance ([#165](https://github.com/oslokommune/reusable-docker-build-push/issues/165)) ([28af063](https://github.com/oslokommune/reusable-docker-build-push/commit/28af0632622435f318f45346785a3296412073d6))
+
 ## [2.11.1](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.11.0...v2.11.1) (2025-04-25)
 
 
