@@ -276,7 +276,7 @@ jobs:
       contents: read
       packages: write
 
-    environment: "${{ inputs.environment }}"
+    #environment: "${{ inputs.environment }}"
 
     outputs:
       image_version: ${{ steps.docker-meta.outputs.version }}
