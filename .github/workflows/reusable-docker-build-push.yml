@@ -18,6 +18,12 @@ on:
 
     inputs:
 
+      aws_role_arn:
+        description: >
+          The AWS role ARN to assume to authenticate to the AWS Elastic Container Registry. This takes precedence
+          over secrets.AWS_ROLE_ARN.
+        type: string
+
       environment:
         description: >
           The GitHub deployment environment to use. Leave empty to not use a deployment environment.
@@ -292,7 +298,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@b47578312673ae6fa5b5096b330d9fbac3d116df # v4.2.1
         with:
           aws-region: ${{ inputs.region }}
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          role-to-assume: ${{ inputs.aws_role_arn || secrets.AWS_ROLE_ARN }}
           role-session-name: ${{ inputs.role_session_name || github.event.repository.name }}
 
 
