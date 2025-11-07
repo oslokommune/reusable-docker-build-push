@@ -123,6 +123,14 @@ on:
           type=raw,value=gha-${{ github.run_id }}
           type=semver,pattern={{version}}
 
+      tag_flavor:
+        # https://github.com/marketplace/actions/docker-metadata-action#flavor-input
+        description: >
+          Flavor configuration for docker-metadata (for example to control the latest tag strategy).
+        required: false
+        type: string
+        default: latest=auto
+
       aws_ecr_login:
         description: Log into AWS Elastic Container Registry (ECR).
         required: false
@@ -341,6 +349,7 @@ jobs:
             ${{ env.GHCR_REGISTRY }}
 
           tags: ${{ inputs.tag_rules }}
+          flavor: ${{ inputs.tag_flavor }}
 
 
       - if: ${{ inputs.platforms != 'linux/amd64' && runner.arch != 'ARM64' }}
