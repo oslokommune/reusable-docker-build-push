@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.12.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.11.3...v2.12.0) (2025-11-07)
+
+
+### Features
+
+* allow configuring docker metadata flavor ([#183](https://github.com/oslokommune/reusable-docker-build-push/issues/183)) ([0487e18](https://github.com/oslokommune/reusable-docker-build-push/commit/0487e18e53f9b970e0078bc6a704bcb87c61bcf0))
+
 ## [2.11.3](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.11.2...v2.11.3) (2025-07-28)
 
 
