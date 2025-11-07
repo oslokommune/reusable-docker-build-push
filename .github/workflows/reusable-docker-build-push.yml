@@ -341,6 +341,10 @@ jobs:
             ${{ env.GHCR_REGISTRY }}
 
           tags: ${{ inputs.tag_rules }}
+          flavor: |
+            latest=false
+            prefix=
+            suffix=
 
 
       - if: ${{ inputs.platforms != 'linux/amd64' && runner.arch != 'ARM64' }}
