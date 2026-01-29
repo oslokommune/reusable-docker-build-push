@@ -1,6 +1,6 @@
 {
   "name": "github-actions-docker-build-push",
-  "description": "Reusable GitHub Actions workflow for building and pushing Docker images to ECR or GHCR",
+  "description": "Reusable GitHub Actions workflow for building and pushing Docker images to ECR or GHCR. Used together with iac-platform skill for CI/CD pipelines.",
   "version": "1.0.0",
   "author": {
     "name": "Kjøremiljø"
