@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.14.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.13.0...v2.14.0) (2026-05-13)
+
+
+### Features
+
+* expose merge-multiple as input to download-artifact ([#194](https://github.com/oslokommune/reusable-docker-build-push/issues/194)) ([34c47ee](https://github.com/oslokommune/reusable-docker-build-push/commit/34c47eeae423e5724e01094fbff6aff9722e3cd2))
+
 ## [2.13.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.12.0...v2.13.0) (2026-05-13)
 
 
