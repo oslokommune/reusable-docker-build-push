@@ -70,6 +70,15 @@ on:
         required: false
         type: string
 
+      download_artifact_merge_multiple:
+        description: >
+          When multiple artifacts are matched, controls the destination layout. If true, all artifacts are extracted
+          into the same `path`; if false, each artifact gets its own named subdirectory. Ignored when downloading a
+          single artifact by name. See https://github.com/actions/download-artifact#inputs
+        required: false
+        type: boolean
+        default: true
+
       context:
         description: >
           Docker context (path) to start build from.
@@ -338,7 +347,7 @@ jobs:
         with:
           name: ${{ inputs.download_artifact_name }}
           path: ${{ inputs.download_artifact_path }}
-          merge-multiple: true
+          merge-multiple: ${{ inputs.download_artifact_merge_multiple }}
 
 
       - if: inputs.download_artifact
