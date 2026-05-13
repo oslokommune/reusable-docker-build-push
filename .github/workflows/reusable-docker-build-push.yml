@@ -332,12 +332,20 @@ jobs:
 
 
       - if: inputs.download_artifact
+        id: download-artifact
         name: Download artifacts 📦
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
           name: ${{ inputs.download_artifact_name }}
           path: ${{ inputs.download_artifact_path }}
           merge-multiple: true
+
+
+      - if: inputs.download_artifact
+        name: List downloaded artifact(s) 📦
+        run: ls -R -- "$DOWNLOAD_PATH"
+        env:
+          DOWNLOAD_PATH: ${{ steps.download-artifact.outputs.download-path }}
 
 
       - name: Extract metadata (tags, labels) from Git reference and GitHub events ⚙️
