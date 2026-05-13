@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.13.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.12.0...v2.13.0) (2026-05-13)
+
+
+### Features
+
+* add Claude Code plugin skill for workflow documentation ([#190](https://github.com/oslokommune/reusable-docker-build-push/issues/190)) ([981b77c](https://github.com/oslokommune/reusable-docker-build-push/commit/981b77c03581616cfe2f37651e237c422d405959))
+
+
+### Bug Fixes
+
+* log contents of downloaded artifact directory ([#193](https://github.com/oslokommune/reusable-docker-build-push/issues/193)) ([0db0aee](https://github.com/oslokommune/reusable-docker-build-push/commit/0db0aeef2cfab3fe78cc0e649c017b95ce0d231b))
+
+
+### Dependency Updates
+
+* Bump actions/cache from 4.2.3 to 4.3.0 in /.github/workflows ([#178](https://github.com/oslokommune/reusable-docker-build-push/issues/178)) ([7efcee4](https://github.com/oslokommune/reusable-docker-build-push/commit/7efcee4759b8fbcb18be176f9df41975ec7452cc))
+* Bump actions/download-artifact in /.github/workflows ([#181](https://github.com/oslokommune/reusable-docker-build-push/issues/181)) ([176b79c](https://github.com/oslokommune/reusable-docker-build-push/commit/176b79ceb44c427be595f3e13245eee37cd24f19))
+* Bump docker/login-action from 3.4.0 to 3.6.0 in /.github/workflows ([#179](https://github.com/oslokommune/reusable-docker-build-push/issues/179)) ([583f850](https://github.com/oslokommune/reusable-docker-build-push/commit/583f8504c8234dca4ac3708254ccceb6e2c36815))
+* Bump docker/metadata-action in /.github/workflows ([#172](https://github.com/oslokommune/reusable-docker-build-push/issues/172)) ([48feb4f](https://github.com/oslokommune/reusable-docker-build-push/commit/48feb4f72f492082f088ac27fea4920d90d570f4))
+
 ## [2.12.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.11.3...v2.12.0) (2025-11-07)
 
 
