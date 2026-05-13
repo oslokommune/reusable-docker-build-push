@@ -70,6 +70,14 @@ on:
         required: false
         type: string
 
+      download_artifact_merge_multiple:
+        description: >
+          Input passed to actions/download-artifact. See
+          https://github.com/actions/download-artifact#inputs
+        required: false
+        type: boolean
+        default: true
+
       context:
         description: >
           Docker context (path) to start build from.
@@ -337,7 +345,7 @@ jobs:
         with:
           name: ${{ inputs.download_artifact_name }}
           path: ${{ inputs.download_artifact_path }}
-          merge-multiple: true
+          merge-multiple: ${{ inputs.download_artifact_merge_multiple }}
 
 
       - name: Extract metadata (tags, labels) from Git reference and GitHub events ⚙️
