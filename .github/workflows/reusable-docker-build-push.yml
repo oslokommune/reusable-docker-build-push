@@ -72,8 +72,9 @@ on:
 
       download_artifact_merge_multiple:
         description: >
-          Input passed to actions/download-artifact. See
-          https://github.com/actions/download-artifact#inputs
+          When multiple artifacts are matched, controls the destination layout. If true, all artifacts are extracted
+          into the same `path`; if false, each artifact gets its own named subdirectory. Ignored when downloading a
+          single artifact by name. See https://github.com/actions/download-artifact#inputs
         required: false
         type: boolean
         default: true
