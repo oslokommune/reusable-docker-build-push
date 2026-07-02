@@ -177,6 +177,16 @@ on:
         required: false
         type: string
 
+      cache_scope:
+        description: |
+          The scope to use for the GitHub Actions build cache.
+
+          Builds sharing a scope share cache entries, and concurrent builds writing the same layers to the same scope can conflict.
+
+          Default is the ECR repository name, or the GitHub repository name if that is not set.
+        required: false
+        type: string
+
       gradle_cache:
         description: |
           Enable or disable the use of a persistent Gradle directory cache.
@@ -517,6 +527,13 @@ jobs:
           skip-extraction: ${{ steps.cache-go.outputs.cache-hit }}
 
 
+      - name: Set build cache scope ⚙
+        # Sanitized to [A-Za-z0-9_.-] to prevent injection of extra cache-to/cache-from attributes.
+        env:
+          RAW_CACHE_SCOPE: ${{ inputs.cache_scope || inputs.ecr_repository_name || github.event.repository.name }}
+        run: echo "CACHE_SCOPE=$(printf '%s' "$RAW_CACHE_SCOPE" | tr -c 'A-Za-z0-9_.-' '-')" >> "$GITHUB_ENV"
+
+
       - name: Build and push (if enabled) Docker image to one or more registries 🚀
         id: build-push
         uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6.18.0
@@ -543,8 +560,9 @@ jobs:
           secrets: ${{ secrets.DOCKER_SECRETS }}
 
           # https://docs.docker.com/build/ci/github-actions/examples/#cache
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          # Separate cache scopes keep concurrent builds from racing, ignore-error keeps cache export failures non-fatal.
+          cache-from: type=gha,scope=${{ env.CACHE_SCOPE }}
+          cache-to: type=gha,mode=max,ignore-error=true,scope=${{ env.CACHE_SCOPE }}
 
           tags: ${{ steps.docker-meta.outputs.tags }}
           labels: ${{ steps.docker-meta.outputs.labels }}
