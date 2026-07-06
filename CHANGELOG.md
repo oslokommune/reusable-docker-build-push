@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.14.1](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.14.0...v2.14.1) (2026-07-06)
+
+
+### Bug Fixes
+
+* scope GHA build cache and tolerate cache export errors ([#197](https://github.com/oslokommune/reusable-docker-build-push/issues/197)) ([382d21a](https://github.com/oslokommune/reusable-docker-build-push/commit/382d21adac9c587048aadfaedc800f273091087b))
+
 ## [2.14.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.13.0...v2.14.0) (2026-05-13)
 
 
