@@ -179,9 +179,9 @@ on:
 
       cache_scope:
         description: |
-          The scope to use for the GitHub Actions build cache.
+          The scope to use for the Docker build cache stored in the GitHub Actions cache backend (`type=gha`).
 
-          Builds sharing a scope share cache entries, and concurrent builds writing the same layers to the same scope can conflict.
+          Builds sharing a scope share cached layers, and concurrent builds writing the same layers to the same scope can conflict.
 
           Default is the ECR repository name, or the GitHub repository name if that is not set.
         required: false
