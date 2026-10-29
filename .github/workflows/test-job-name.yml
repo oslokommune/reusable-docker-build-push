@@ -1,0 +1,27 @@
+# Temporary: shows the build job's name for each combination of push inputs.
+name: Test job name
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  call:
+    name: ecr=${{ matrix.aws_ecr_push }} ghcr=${{ matrix.ghcr_push }}
+    strategy:
+      fail-fast: false
+      matrix:
+        aws_ecr_push: [false, true]
+        ghcr_push: [false, true]
+    permissions:
+      id-token: write
+      contents: read
+      packages: write
+    uses: ./.github/workflows/reusable-docker-build-push.yml
+    with:
+      aws_ecr_login: false
+      aws_ecr_push: ${{ matrix.aws_ecr_push }}
+      ghcr_push: ${{ matrix.ghcr_push }}
+      file: does-not-exist.Dockerfile
