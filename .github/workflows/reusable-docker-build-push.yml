@@ -288,7 +288,13 @@ jobs:
 
   build_push:
 
-    name: Build and push the Docker image
+    name: >-
+      ${{
+        (inputs.aws_ecr_push && inputs.ghcr_push) && 'Build and push the Docker image to ECR and GHCR'
+        || (inputs.aws_ecr_push && 'Build and push the Docker image to ECR')
+        || (inputs.ghcr_push && 'Build and push the Docker image to GHCR')
+        || 'Build the Docker image'
+      }}
 
     runs-on: "${{ inputs.runner }}"
 
