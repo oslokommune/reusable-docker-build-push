@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.15.0](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.14.1...v2.15.0) (2026-10-29)
+
+
+### Features
+
+* name the build job after the registries it pushes to ([#200](https://github.com/oslokommune/reusable-docker-build-push/issues/200)) ([edd57ef](https://github.com/oslokommune/reusable-docker-build-push/commit/edd57ef18af34c75d573caccd827d32d2014f0cd))
+
 ## [2.14.1](https://github.com/oslokommune/reusable-docker-build-push/compare/v2.14.0...v2.14.1) (2026-07-06)
 
 
